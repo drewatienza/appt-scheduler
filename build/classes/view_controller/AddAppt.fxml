@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            fx:controller="view_controller.AddApptController"
+            prefHeight="550.0" prefWidth="1000.0">
+    <children>
+        <Label fx:id="addApptLabel" layoutX="25.0" layoutY="20.0" text="Add Appointment">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="addApptTitleLabel" layoutX="40.0" layoutY="70.0" text="Title" />
+        <TextField fx:id="addApptTitleField" layoutX="190.0" layoutY="66.0" prefHeight="25.0" prefWidth="260.0"
+                   promptText="Title" />
+
+        <Label fx:id="addApptDescLabel" layoutX="40.0" layoutY="120.0" text="Description" />
+        <TextArea fx:id="addApptDescField" layoutX="190.0" layoutY="116.0" prefHeight="75.0"
+                  prefWidth="260.0" promptText="Description" />
+
+        <Label fx:id="addApptLocationLabel" layoutX="40.0" layoutY="210.0" text="Location" />
+        <TextField fx:id="addApptLocationField" layoutX="190.0" layoutY="206.0" prefHeight="25.0"
+                   prefWidth="260.0" promptText="Location" />
+
+        <Label fx:id="addApptContactLabel" layoutX="40.0" layoutY="260.0" text="Contact" />
+        <TextField fx:id="addApptContactField" layoutX="190.0" layoutY="256.0" prefHeight="25.0"
+                   prefWidth="260.0" promptText="Contact" />
+
+        <Label fx:id="addApptUrlLabel" layoutX="40.0" layoutY="310.0" text="URL" />
+        <TextField fx:id="addApptUrlField" layoutX="190.0" layoutY="306.0" prefHeight="25.0" prefWidth="260.0"
+                   promptText="URL" />
+
+        <Label fx:id="addApptDateLabel" layoutX="40.0" layoutY="355.0" text="Date" />
+        <DatePicker fx:id="addApptDatePicker" layoutX="190.0" layoutY="351.0" prefHeight="25.0"
+                    prefWidth="180.0" />
+
+        <Label fx:id="addApptStartLabel" layoutX="40.0" layoutY="400.0" text="Start Time" />
+        <TextField fx:id="addApptStartHrField" layoutX="190.0" layoutY="396.0" prefHeight="25.0"
+                   prefWidth="45.0" />
+        <Label layoutX="243.0" layoutY="400.0" text=":" />
+        <TextField fx:id="addApptStartMinField" layoutX="255.0" layoutY="396.0" prefHeight="25.0"
+                   prefWidth="45.0" />
+        <ChoiceBox fx:id="addApptStartChoice" layoutX="315.0" layoutY="396.0" prefHeight="25.0"
+                   prefWidth="50.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="AM" />
+                    <String fx:value="PM" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+        <Label fx:id="addApptEndLabel" layoutX="40.0" layoutY="445.0" text="End Time" wrapText="true" />
+        <TextField fx:id="addApptEndHrField" layoutX="190.0" layoutY="441.0" prefHeight="25.0"
+                   prefWidth="45.0" />
+        <Label layoutX="243.0" layoutY="445.0" text=":" />
+        <TextField fx:id="addApptEndMinField" layoutX="255.0" layoutY="441.0" prefHeight="25.0"
+                   prefWidth="45.0" />
+        <ChoiceBox fx:id="addApptEndChoice" layoutX="315.0" layoutY="441.0" prefHeight="25.0"
+                   prefWidth="50.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="AM" fx:value="AM" />
+                    <String fx:id="PM" fx:value="PM" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+
+        <TableView fx:id="addApptAddTV" layoutX="500.0" layoutY="65.0" prefHeight="150.0" prefWidth="450.0">
+            <columns>
+                <TableColumn fx:id="addNameColTV" prefWidth="112.5" />
+                <TableColumn fx:id="addCityColTV" prefWidth="112.5" />
+                <TableColumn fx:id="addCountryColTV" prefWidth="112.5" />
+                <TableColumn fx:id="addPhoneColTV" prefWidth="112.5" />
+            </columns>
+        </TableView>
+        <Button fx:id="addApptAddBtn" layoutX="875.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="75.0" text="Add" />
+        <TableView fx:id="addApptDelTV" layoutX="500.0" layoutY="265.0" prefHeight="150.0" prefWidth="450.0">
+            <columns>
+                <TableColumn fx:id="delNameColTV" prefWidth="112.5" />
+                <TableColumn fx:id="delCityColTV" prefWidth="112.5" />
+                <TableColumn fx:id="delCountryColTV" prefWidth="112.5" />
+                <TableColumn fx:id="delPhoneColTV" prefWidth="112.5" />
+            </columns>
+        </TableView>
+        <Button fx:id="addApptDelBtn" layoutX="875.0" layoutY="425.0" mnemonicParsing="false"
+                onAction="#delCustDelTV" prefHeight="25.0" prefWidth="75.0" text="Delete" />
+
+        <Button fx:id="addApptSaveBtn" layoutX="790.0" layoutY="500.0" mnemonicParsing="false"
+                onAction="#addApptSave" prefHeight="25.0" prefWidth="75.0" text="Save" />
+        <Button fx:id="addApptCancelBtn" layoutX="875.0" layoutY="500.0" mnemonicParsing="false"
+                onAction="#addApptCancel" prefHeight="25.0" prefWidth="75.0" text="Cancel" />
+    </children>
+</AnchorPane>

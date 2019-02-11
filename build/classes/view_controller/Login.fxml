@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="view_controller.LoginController"
+            prefHeight="300.0" prefWidth="500.0">
+    <children>
+        <Label fx:id="loginTitle" layoutX="140.0" layoutY="20.0" text="Scheduler Login">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Label>
+        <Label fx:id="userLoginLabel" layoutX="100.0" layoutY="115.0" prefWidth="90.0" text="Username:" />
+        <TextField fx:id="userLoginTxt" layoutX="205.0" layoutY="111.0" prefHeight="25.0" prefWidth="195.0" />
+
+        <Label fx:id="pwLoginLabel" layoutX="100.0" layoutY="164.0" prefWidth="90.0" text="Password:" />
+        <PasswordField fx:id="pwLoginTxt" layoutX="205.0" layoutY="160.0" prefHeight="25.0" prefWidth="195.0"
+                       onAction="#loginSubmit" />
+
+
+        <Button fx:id="loginSubmitBtn" layoutX="100.0" layoutY="230.0" mnemonicParsing="false"
+                onAction="#loginSubmit" prefHeight="25.0" prefWidth="300.0" text="Submit" />
+        <Label fx:id="errorMessage" alignment="CENTER" layoutY="207.0" prefHeight="21.0" prefWidth="500.0"
+               textAlignment="CENTER" textFill="RED" />
+    </children>
+</AnchorPane>

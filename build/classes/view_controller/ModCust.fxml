@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            fx:controller="view_controller.ModCustController"
+            prefHeight="500.0" prefWidth="450.0" >
+    <children>
+        <Label fx:id="modCustTitle" layoutX="25.0" layoutY="20.0" text="Modify Customer">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <Label fx:id="modCustNameLabel" layoutX="40.0" layoutY="70.0" text="Customer Name" />
+        <TextField fx:id="modCustNameField" layoutX="190.0" layoutY="66.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Customer Name" />
+
+        <Label fx:id="modCustAdd1Label" layoutX="40.0" layoutY="125.0" text="Address" />
+        <TextField fx:id="modCustAdd1Field" layoutX="190.0" layoutY="121.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Address" />
+
+        <Label fx:id="modCustAdd2Label" layoutX="40.0" layoutY="180.0" text="Address Line 2" />
+        <TextField fx:id="modCustAdd2Field" layoutX="190.0" layoutY="176.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Address Line 2" />
+
+        <Label fx:id="modCustCityLabel" layoutX="40.0" layoutY="235.0" text="City" />
+        <TextField fx:id="modCustCityField" layoutX="190.0" layoutY="231.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="City" />
+
+        <Label fx:id="modCustCountryLabel" layoutX="40.0" layoutY="290.0" text="Country" />
+        <TextField fx:id="modCustCountryField" layoutX="190.0" layoutY="286.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Country" />
+
+        <Label fx:id="modCustPostalLabel" layoutX="40.0" layoutY="345.0" text="Zip Code" />
+        <TextField fx:id="modCustPostalField" layoutX="190.0" layoutY="341.0" prefHeight="25.0"
+                   prefWidth="200.0" promptText="Zip Code" />
+
+        <Label fx:id="modCustPhoneLabel" layoutX="40.0" layoutY="400.0" text="Phone" />
+        <TextField fx:id="modCustPhoneField" layoutX="190.0" layoutY="396.0" prefHeight="25.0" prefWidth="200.0"
+                   promptText="Phone" />
+
+        <Button fx:id="modCustSaveBtn" layoutX="205.0" layoutY="450.0" mnemonicParsing="false" prefHeight="25.0"
+                prefWidth="80.0" text="Save" />
+        <Button fx:id="modCustCancelBtn" alignment="CENTER" layoutX="305.0" layoutY="450.0"
+                mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancel" />
+    </children>
+</AnchorPane>
