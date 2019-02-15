@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 import utils.*;
@@ -386,7 +387,6 @@ public class Database {
                 String createdBy = result.getString(9);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
                 dateFormat.setTimeZone(TimeZone.getDefault());
-//                dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
                 java.util.Date startDate = dateFormat.parse(start.toString());
                 java.util.Date endDate = dateFormat.parse(end.toString());
                 Appointment appointment = new Appointment(
@@ -406,11 +406,7 @@ public class Database {
             }
         }
         catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Error Adding Appointment");
-            alert.setContentText("You are currently not connected to the database.");
-            alert.showAndWait();
+            e.printStackTrace();
         }
     }
 
@@ -421,25 +417,39 @@ public class Database {
                                      String location,
                                      String contact,
                                      String url,
-                                     LocalDateTime startUTC,
-                                     LocalDateTime endUTC) {
-        String uTCStart = startUTC.toString();
-        uTCStart = uTCStart.substring(0,10) + " " + uTCStart.substring(11,16) + ":00";
-        Timestamp start = Timestamp.valueOf(uTCStart);
-        String uTCEnd = endUTC.toString();
-        uTCEnd = uTCEnd.substring(0,10) + " " + uTCEnd.substring(11,16) + ":00";
-        Timestamp end = Timestamp.valueOf(uTCEnd);
-        if (apptOverlap(start, end)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Error Adding Appointment");
-            alert.setContentText("The times for this appointment overlaps with an existing appointment.");
-            alert.showAndWait();
+                                     ZonedDateTime startUTC,
+                                     ZonedDateTime endUTC) {
+        try {
+            String uTCStart = startUTC.toString();
+            uTCStart = uTCStart.substring(0,10) + " " + uTCStart.substring(11,16) + ":00";
+            Timestamp start = Timestamp.valueOf(uTCStart);   
+            String uTCEnd = endUTC.toString();
+            uTCEnd = uTCEnd.substring(0,10) + " " + uTCEnd.substring(11,16) + ":00";
+            Timestamp end = Timestamp.valueOf(uTCEnd);
+            
+            ZonedDateTime startUTC2 = ZonedDateTime.ofInstant(startUTC.toInstant(), ZoneId.systemDefault());
+            ZonedDateTime endUTC2 = ZonedDateTime.ofInstant(endUTC.toInstant(), ZoneId.systemDefault());
+            String localStart = startUTC2.toString();
+            localStart = localStart.substring(0,10) + " " + localStart.substring(11,16) + ":00";
+            Timestamp start2 = Timestamp.valueOf(localStart);
+            String localEnd = endUTC2.toString();
+            localEnd = localEnd.substring(0,10) + " " + localEnd.substring(11,16) + ":00";
+            Timestamp end2 = Timestamp.valueOf(localEnd);
+            if (apptOverlap(start2, end2)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Error Adding Appointment");
+                alert.setContentText("The times for this appointment overlaps with an existing appointment.");
+                alert.showAndWait();
+                return false;                
+            } else {
+                int customerId = customer.getCustomerId();
+                addAppointment(customerId, title, description, location, contact, url, start, end);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
-        } else {
-            int customerId = customer.getCustomerId();
-            addAppointment(customerId, title, description, location, contact, url, start, end);
-            return true;
         }
     }
 
@@ -515,34 +525,38 @@ public class Database {
                                      String location,
                                      String contact,
                                      String url,
-                                     LocalDateTime startUTC,
-                                     LocalDateTime endUTC) {
+                                     ZonedDateTime startUTC,
+                                     ZonedDateTime endUTC) {
         try {
             String uTCStart = startUTC.toString();
-            uTCStart = uTCStart.substring(0, 10) + " " + uTCStart.substring(11, 16) + ":00";
-            Timestamp start = Timestamp.valueOf(uTCStart);
+            uTCStart = uTCStart.substring(0,10) + " " + uTCStart.substring(11,16) + ":00";
+            Timestamp start = Timestamp.valueOf(uTCStart);   
             String uTCEnd = endUTC.toString();
-            uTCEnd = uTCEnd.substring(0, 10) + " " + uTCEnd.substring(11, 16) + ":00";
+            uTCEnd = uTCEnd.substring(0,10) + " " + uTCEnd.substring(11,16) + ":00";
             Timestamp end = Timestamp.valueOf(uTCEnd);
-            if (doesApptOverlap(start, end)) {
+            
+            ZonedDateTime startUTC2 = ZonedDateTime.ofInstant(startUTC.toInstant(), ZoneId.systemDefault());
+            ZonedDateTime endUTC2 = ZonedDateTime.ofInstant(endUTC.toInstant(), ZoneId.systemDefault());
+            String localStart = startUTC2.toString();
+            localStart = localStart.substring(0,10) + " " + localStart.substring(11,16) + ":00";
+            Timestamp start2 = Timestamp.valueOf(localStart);
+            String localEnd = endUTC2.toString();
+            localEnd = localEnd.substring(0,10) + " " + localEnd.substring(11,16) + ":00";
+            Timestamp end2 = Timestamp.valueOf(localEnd);
+            if (apptOverlap(start2, end2)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setHeaderText("Error Modifying Appointment");
                 alert.setContentText("The times for this appointment overlaps with an existing appointment");
                 alert.showAndWait();
-                return false;
+                return false;               
             } else {
                 int customerId = customer.getCustomerId();
                 updateAppointment(appointmentId, customerId, title, description, location, contact, url, start, end);
                 return true;
             }
-        }
-        catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Error Adding Appointment");
-            alert.setContentText("You are currently not connected to the database.");
-            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -564,36 +578,6 @@ public class Database {
                 start + "', end = '" + end + "', " +
                 "lastUpdate = CURRENT_TIMESTAMP, lastUpdateBy = '" + Logger.currentUser +
                 "' WHERE appointmentId = " + appointmentId);
-    }
-
-    // CHECKS IF NEW APPOINTMENT OVERLAPS
-    private static boolean doesApptOverlap(Timestamp start, Timestamp end) throws SQLException, ParseException {
-        int appointmentIndexToRemove = AppointmentController.getApptIndexMod();
-        ObservableList<Appointment> appointmentList = ApptList.getAppointmentList();
-        appointmentList.remove(appointmentIndexToRemove);
-        for (Appointment appointment: appointmentList) {
-            Timestamp startTS = appointment.getStart();
-            Timestamp endTS = appointment.getEnd();
-            if (start.after(startTS) && start.before(endTS)) {
-                return true;
-            }
-            if (end.after(startTS) && end.before(endTS)) {
-                return true;
-            }
-            if (start.after(startTS) && end.before(endTS)) {
-                return true;
-            }
-            if (start.before(startTS) && end.after(endTS)) {
-                return true;
-            }
-            if (start.equals(startTS)) {
-                return true;
-            }
-            if (end.equals(endTS)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 
