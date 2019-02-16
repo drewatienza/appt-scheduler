@@ -94,36 +94,28 @@ public class Database {
                                   String city,
                                   String country,
                                   String postalCode,
-                                  String phone) {
-        try {
-            int countryId = country(country);
-            int cityId = city(city, countryId);
-            int addressId = address(address, address2, postalCode, phone, cityId);
-            if (isCustomer(customerName, addressId)) {
-                Statement statement = DBManager.getConnection().createStatement();
-                ResultSet result = statement.executeQuery("SELECT active FROM customer WHERE " +
-                        "customerName = '" + customerName + "' AND addressId = " + addressId);
-                result.next();
-                int active = result.getInt(1);
-                if (active == 1) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERROR");
-                    alert.setHeaderText("Error Adding Customer");
-                    alert.setContentText("This customer already exists in the database");
-                    alert.showAndWait();
-                }
-                else if (active == 0) {
-                    setCustomerToActive(customerName, addressId);
-                }
-            } else {
-                addCustomer(customerName, addressId);
+                                  String phone) throws SQLException {
+        int countryId = country(country);
+        int cityId = city(city, countryId);
+        int addressId = address(address, address2, postalCode, phone, cityId);
+        if (isCustomer(customerName, addressId)) {
+            Statement statement = DBManager.getConnection().createStatement();
+            ResultSet result = statement.executeQuery("SELECT active FROM customer WHERE " +
+                    "customerName = '" + customerName + "' AND addressId = " + addressId);
+            result.next();
+            int active = result.getInt(1);
+            if (active == 1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Error Adding Customer");
+                alert.setContentText("This customer already exists in the database");
+                alert.showAndWait();
             }
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Error Adding Customer");
-            alert.setContentText("You are not currently connected to the database.");
-            alert.showAndWait();
+            else if (active == 0) {
+                setCustomerToActive(customerName, addressId);
+            }
+        } else {
+            addCustomer(customerName, addressId);
         }
     }
 
@@ -284,26 +276,17 @@ public class Database {
                                      String city,
                                      String country,
                                      String postalCode,
-                                     String phone) {
-        try {
-            int countryId = country(country);
-            int cityId = city(city, countryId);
-            int addressId = address(address, address2, postalCode, phone, cityId);
-            if (isCustomer(customerName, addressId)) {
-                int existingCustomerId = getCustomerId(customerName, addressId);
-                int activeStatus = getActiveStatus(existingCustomerId);
-                return activeStatus;
-            } else {
-                updateCustomer(customerId, customerName, addressId);
-                cleanDatabase();
-                return -1;
-            }
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Error Modifying Customer");
-            alert.setContentText("You are not currently connected to the database.");
-            alert.showAndWait();
+                                     String phone) throws SQLException {
+        int countryId = country(country);
+        int cityId = city(city, countryId);
+        int addressId = address(address, address2, postalCode, phone, cityId);
+        if (isCustomer(customerName, addressId)) {
+            int existingCustomerId = getCustomerId(customerName, addressId);
+            int activeStatus = getActiveStatus(existingCustomerId);
+            return activeStatus;
+        } else {
+            updateCustomer(customerId, customerName, addressId);
+            cleanDatabase();
             return -1;
         }
     }
