@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/drewatienza/Desktop/WGU%20C195/src/view_controller/LoginController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/view_controller/ModCustController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/view_controller/AddApptController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/view_controller/ModApptController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/view_controller/AddCustController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/view_controller/ReportsController.java</file>
+            <file>file:/Users/drewatienza/Desktop/Scheduler/src/model/Database.java</file>
         </group>
     </open-files>
 </project-private>

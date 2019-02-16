@@ -5,10 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tab?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view_controller.ReportsController"
-            prefHeight="275.0" prefWidth="375.0" >
+            prefHeight="500.0" prefWidth="650.0">
     <children>
         <Label fx:id="lblReports" layoutX="25.0" layoutY="20.0" text="Reports Menu">
             <font>
@@ -16,25 +19,66 @@
             </font>
         </Label>
 
-        <Label fx:id="typesByMonthLabel" layoutX="25.0" layoutY="75.0"
-               text="Appointment Types by Month" />
-        <Button fx:id="typesByMonthBtn" layoutX="250.0" layoutY="71.0" mnemonicParsing="false" prefHeight="30.0"
-                prefWidth="100.0"
-                text="Generate" />
+        <TabPane tabMinWidth="180.0" layoutX="15.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0"
+                 tabClosingPolicy="UNAVAILABLE">
+            <tabs>
 
-        <Label fx:id="consultantSchedLabel" layoutX="25.0" layoutY="125.0" text="Schedule for Each Consultant" />
-        <Button fx:id="consultantSchedBtn" layoutX="250.0" layoutY="121.0" mnemonicParsing="false" prefHeight="30.0"
-                prefWidth="100.0"
-                text="Generate" />
+                <Tab text="Appointment Type By Month">
+                    <content>
+                        <AnchorPane prefHeight="300.0" prefWidth="580.0">
+                            <children>
+                                <TextArea fx:id="apptByMonthReport" editable="false" layoutX="10.0" layoutY="50.0"
+                                          prefHeight="280.0" prefWidth="580.0" />
+                                <Label layoutX="170.0" layoutY="14.0" text="Appointment Type By Month">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
 
-        <Label fx:id="custSchedLabel" layoutX="25.0" layoutY="175.0" text="Customer Schedule" />
-        <Button fx:id="custSchedBtn" layoutX="250.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0"
-                prefWidth="100.0"
-                text="Generate" />
+                <Tab text="Consultant Schedule">
+                    <content>
+                        <AnchorPane prefHeight="345.0" prefWidth="580.0">
+                            <children>
+                                <TextArea fx:id="consultantReport" editable="false" layoutX="11.0" layoutY="50.0"
+                                          prefHeight="280.0" prefWidth="580.0" />
+                                <Label layoutX="200.0" layoutY="14.0" text="Consultant Schedule">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
 
-        <Button fx:id="reportsMainMenuBtn" layoutX="125.0" layoutY="225.0" mnemonicParsing="false" prefHeight="30.0"
+                <Tab text="Customer Schedule">
+                    <content>
+                        <AnchorPane prefHeight="180.0" prefWidth="580.0">
+                            <children>
+                                <Label layoutX="200.0" layoutY="14.0" text="Customer Schedule">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TextArea fx:id="customerReport" editable="false" layoutX="11.0" layoutY="50.0"
+                                          prefHeight="280.0" prefWidth="580.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+
+        <Button fx:id="reportsMainMenuBtn" layoutX="400.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0"
                 prefWidth="100.0" text="Main Menu" />
-        <Button fx:id="reportsExitBtn" layoutX="250.0" layoutY="225.0" mnemonicParsing="false" prefHeight="30.0"
+
+        <Button fx:id="reportsExitBtn" layoutX="525.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0"
                 prefWidth="100.0" text="Exit" />
+
     </children>
 </AnchorPane>
