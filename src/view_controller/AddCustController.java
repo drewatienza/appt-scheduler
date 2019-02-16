@@ -12,7 +12,10 @@ import javafx.stage.Stage;
 import model.Customer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static model.Database.addNewCust;
 
@@ -55,7 +58,7 @@ public class AddCustController {
 
     // SAVE CUSTOMER
     @FXML
-    private void addCustSave(ActionEvent event) {
+    private void addCustSave(ActionEvent event) throws SQLException {
         String customerName = addCustNameField.getText();
         String address = addCustAdd1Field.getText();
         String address2 = addCustAdd2Field.getText();
@@ -68,7 +71,7 @@ public class AddCustController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Add Customer Error");
-            alert.setContentText("There was error adding customer.  Customer may already exist in the database.");
+            alert.setContentText(errorMessage);
             alert.showAndWait();
             return;
         }
@@ -111,7 +114,13 @@ public class AddCustController {
     @FXML
     public void initialize() {
         // BUTTON ACTION
-        addCustSaveBtn.setOnAction(event -> addCustSave(event));
+        addCustSaveBtn.setOnAction(event -> {
+            try {
+                addCustSave(event);
+            } catch (SQLException ex) {
+                Logger.getLogger(AddCustController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         addCustCancelBtn.setOnAction(event -> addCustCancel(event));
     }
 }

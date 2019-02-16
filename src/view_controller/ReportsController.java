@@ -71,6 +71,7 @@ public class ReportsController {
                     }
                 }
             }
+            report = report + "\n";
             report = report + yearMonth + ": " + typeCount + "\n";
             report = report + "Appointment Types: ";
             for (String description : descriptions) {
@@ -96,6 +97,7 @@ public class ReportsController {
         }
         Collections.sort(consultsWithAppts);
         for (String consultant : consultsWithAppts) {
+            report = report + "\n";
             report = report + consultant + ": \n";
             for (Appointment appointment : ApptList.getAppointmentList()) {
                 String appointmentConsultant = appointment.getCreatedBy();
@@ -152,6 +154,7 @@ public class ReportsController {
             for (Customer customer : CustList.getCustomerList()) {
                 int customerIdToCheck = customer.getCustomerId();
                 if (customerId == customerIdToCheck) {
+                    report = report + "\n";
                     report = report + customer.getCustomerName() + ": \n";
                 }
             }

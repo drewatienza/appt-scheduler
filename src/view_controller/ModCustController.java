@@ -12,7 +12,10 @@ import javafx.stage.Stage;
 import model.Customer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static model.CustList.getCustomerList;
 import static model.Database.*;
@@ -61,7 +64,7 @@ public class ModCustController {
 
     // SAVE CUSTOMER
     @FXML
-    private void modCustSave(ActionEvent event) {
+    private void modCustSave(ActionEvent event) throws SQLException {
         int customerId = customer.getCustomerId();
         String customerName = modCustNameField.getText();
         String address = modCustAdd1Field.getText();
@@ -151,7 +154,13 @@ public class ModCustController {
         modCustPhoneField.setText(phone);
 
         // BUTTON ACTION
-        modCustSaveBtn.setOnAction(event -> modCustSave(event));
+        modCustSaveBtn.setOnAction(event -> {
+            try {
+                modCustSave(event);
+            } catch (SQLException ex) {
+                Logger.getLogger(ModCustController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         modCustCancelBtn.setOnAction(event -> modCustCancel(event));
     }
 }
