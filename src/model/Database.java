@@ -94,7 +94,7 @@ public class Database {
                                   String city,
                                   String country,
                                   String postalCode,
-                                  String phone) throws SQLException {
+                                  String phone) throws Exception {
         int countryId = country(country);
         int cityId = city(city, countryId);
         int addressId = address(address, address2, postalCode, phone, cityId);
@@ -276,7 +276,7 @@ public class Database {
                                      String city,
                                      String country,
                                      String postalCode,
-                                     String phone) throws SQLException {
+                                     String phone) throws Exception {
         int countryId = country(country);
         int cityId = city(city, countryId);
         int addressId = address(address, address2, postalCode, phone, cityId);
