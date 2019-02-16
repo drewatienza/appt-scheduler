@@ -231,7 +231,7 @@ public class Appointment {
         String error = "";
         try {
             if (customer == null) {
-                error = error + "You must add a customer o the appointment.";
+                error = error + "You must add a customer to the appointment.";
             }
             if (title.length() == 0) {
                 error = error + "The title field needs to be filled out.";
@@ -259,20 +259,27 @@ public class Appointment {
                     Integer.parseInt(startMinute) > 59 ||
                     Integer.parseInt(endMinute) < 0 ||
                     Integer.parseInt(endMinute) > 59) {
-                error = error + "The time you entered was not valid.  You must have a valid start and end time.";
+                error = error + "The hours value entered must be between 1 and 12 and the minutes value must be between 0 and 59.";
             }
             if ((startAmPm.equals("PM") && endAmPm.equals("AM")) ||
                     (startAmPm.equals(endAmPm) && Integer.parseInt(startHour) != 12 && Integer.parseInt(startHour) > Integer.parseInt(endHour)) ||
                     (startAmPm.equals(endAmPm) && startHour.equals(endHour) && Integer.parseInt(startMinute) > Integer.parseInt(endMinute))) {
                 error = error + "The start time cannot come after the end time.";
             }
+//            if ((Integer.parseInt(startHour) < 9 && startAmPm.equals("AM")) ||
+//                    (Integer.parseInt(endHour) < 9 && endAmPm.equals("AM")) ||
+//                    (Integer.parseInt(startHour) >= 5 && Integer.parseInt(startHour) < 12 && startAmPm.equals("PM")) ||
+//                    (Integer.parseInt(endHour) >= 5 && Integer.parseInt(endHour) < 12 && endAmPm.equals("PM")) ||
+//                    (Integer.parseInt(startHour) == 12 && startAmPm.equals("AM")) ||
+//                    (Integer.parseInt(endHour)) == 12 && endAmPm.equals("AM")) {
+//                error = error + "The appointment start and end time must be between the normal business hours of 9 AM to 5 PM.";
+
+            // THIS IS NEW
             if ((Integer.parseInt(startHour) < 9 && startAmPm.equals("AM")) ||
-                    (Integer.parseInt(endHour) < 9 && endAmPm.equals("AM")) ||
-                    (Integer.parseInt(startHour) >= 5 && Integer.parseInt(startHour) < 12 && startAmPm.equals("PM")) ||
-                    (Integer.parseInt(endHour) >= 5 && Integer.parseInt(endHour) < 12 && endAmPm.equals("PM")) ||
-                    (Integer.parseInt(startHour) == 12 && startAmPm.equals("AM")) ||
-                    (Integer.parseInt(endHour)) == 12 && endAmPm.equals("AM")) {
-                error = error + "The appointment start and end time must be between the normal business hours of 9 AM to 5 PM.";
+                    (Integer.parseInt(startHour) >= 5 && startAmPm.equals("PM")) ||
+                    (Integer.parseInt(endHour) < 9 && startAmPm.equals("AM")) ||
+                    (Integer.parseInt(endHour) >= 5 && startAmPm.equals("PM"))) {
+                error = error + "The appointment start and end time must be between the normal business hours of 9 AM and 5 PM.";
             }
             if (appointmentDate.getDayOfWeek().toString().toUpperCase().equals("SATURDAY") ||
                     appointmentDate.getDayOfWeek().toString().toUpperCase().equals("SUNDAY")) {
