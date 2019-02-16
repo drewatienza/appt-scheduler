@@ -64,7 +64,7 @@ public class ModCustController {
 
     // SAVE CUSTOMER
     @FXML
-    private void modCustSave(ActionEvent event) throws SQLException {
+    private void modCustSave(ActionEvent event) throws Exception {
         int customerId = customer.getCustomerId();
         String customerName = modCustNameField.getText();
         String address = modCustAdd1Field.getText();
@@ -155,9 +155,9 @@ public class ModCustController {
 
         // BUTTON ACTION
         modCustSaveBtn.setOnAction(event -> {
-            try {
+            try {           
                 modCustSave(event);
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(ModCustController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });

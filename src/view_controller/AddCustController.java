@@ -58,7 +58,7 @@ public class AddCustController {
 
     // SAVE CUSTOMER
     @FXML
-    private void addCustSave(ActionEvent event) throws SQLException {
+    private void addCustSave(ActionEvent event) throws Exception {
         String customerName = addCustNameField.getText();
         String address = addCustAdd1Field.getText();
         String address2 = addCustAdd2Field.getText();
@@ -117,7 +117,7 @@ public class AddCustController {
         addCustSaveBtn.setOnAction(event -> {
             try {
                 addCustSave(event);
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(AddCustController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
